@@ -40,3 +40,6 @@ android/app/libs
 android/keystores/debug.keystore
 
 # React Webpack Bundle
+
+# VS Code
+\.vscode/

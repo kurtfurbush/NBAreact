@@ -6,19 +6,33 @@ var APP_DIR = path.resolve(__dirname, 'src/app'); //app codebase
 
 var config = {
   entry: [
-      APP_DIR + '/jsx/app.jsx'
+    'webpack-dev-server/client?http://localhost:5000',
+    'webpack/hot/dev-server',
+    APP_DIR + '/jsx/app.jsx'
   ],
   output: {
     path: BUILD_DIR,
     publicPath: '/src/public/',
     filename: 'bundle.js'
   },
-  module : {
-    loaders : [
+  resolve: {
+    extensions: ['', '.js']
+  },
+  devtool: 'inline-source-map',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  module: {
+    loaders: [
       {
-        test : /\.jsx?/,
-        include : APP_DIR,
-        loaders : ['babel']
+        test: /\.jsx?/,
+        include: APP_DIR,
+        loaders: ['babel']
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
       }
     ]
   }
